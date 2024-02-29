@@ -13,6 +13,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public Button btnJoinRoom;
     public InputField inputRoomName;
     public Text textState;
+    public InputField inputUsername;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +68,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         textState.text = "In room - " + PhotonNetwork.CurrentRoom.Name;
+        PhotonNetwork.NickName = inputUsername.text;
         PhotonNetwork.LoadLevel("PlayScene");
     }
 

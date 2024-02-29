@@ -36,9 +36,4 @@ public class CharacterMovement : MonoBehaviour
             rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
         }
     }
-
-    private void Update()
-    {
-        
-    }
 }
