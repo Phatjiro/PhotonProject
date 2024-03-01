@@ -26,7 +26,7 @@ public class MouseCamera : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        if (GetComponent<PhotonView>().IsMine == true)
+       /* if (GetComponent<PhotonView>().IsMine == true)
         {
             turn.x += Input.GetAxis("Mouse X") * sensitivity;
             turn.y += Input.GetAxis("Mouse Y") * sensitivity;
@@ -35,6 +35,6 @@ public class MouseCamera : MonoBehaviourPunCallbacks
 
             deltaMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
             mover.transform.Translate(deltaMove);
-        }
+        }*/
     }
 }

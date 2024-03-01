@@ -2,7 +2,8 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
+
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject mark;
     private Vector3 movementDirection;
     public Rigidbody rb;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +24,8 @@ public class CharacterMovement : MonoBehaviour
     {
         if (GetComponent<PhotonView>().IsMine == true)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
             movementDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
@@ -33,7 +35,20 @@ public class CharacterMovement : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30f);
             }
 
+
             rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+            
+            
+            float Speed = new Vector2(horizontalInput, verticalInput).magnitude;
+
+            if (Speed > 0.1f)
+            {
+                anim.SetFloat("Blend", Speed, 0.3f, Time.deltaTime);
+            }
+            else if (Speed < 0.1f)
+            {
+                anim.SetFloat("Blend", Speed, 0.15f, Time.deltaTime);
+            }
         }
     }
 }
