@@ -7,6 +7,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    PhotonView photonView;
+
+    [SerializeField]
+    CinemachineVirtualCamera cam;
+
+    [SerializeField]
+    Transform player;
+    void Start()
+    {
+        if (photonView.IsMine)
+        {
+            cam.gameObject.SetActive(true);
+            cam.GetComponent<CameraFollower>().SetTarget(player);
+        }
+    }
     private void Update()
     {
         if (Input.GetMouseButton(1))
@@ -14,7 +30,7 @@ public class CameraController : MonoBehaviourPunCallbacks
             if (Input.GetMouseButton(1))
             {
                 float mouseX = Input.GetAxis("Mouse X");
-                transform.RotateAround(transform.position, Vector3.up, mouseX);
+                transform.GetChild(0).RotateAround(transform.position, Vector3.up, mouseX);
             }
         }
     }
